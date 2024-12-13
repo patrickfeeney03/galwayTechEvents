@@ -1,6 +1,7 @@
 <article>
-  <div id="<%= dom_id event %>">
-    <h2><%= event.title %></h2>
-    <p><%= event.body %></p>
-  </div>
+    <div id="<%= dom_id event %>">
+        <h2><%= event.title %></h2>
+        <p><%= event.body %></p>
+        <p><%=Time.zone.parse(event.date) if event.date?%></p>
+    </div>
 </article>
