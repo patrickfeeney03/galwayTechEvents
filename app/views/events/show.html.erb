@@ -8,3 +8,5 @@
 
   <%= button_to "Destroy this event", @event, method: :delete %>
 </div>
+
+<%= render "comments/comments", event: @event %>

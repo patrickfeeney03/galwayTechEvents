@@ -1,0 +1,7 @@
+<h3>Comments</h3>
+
+<div id="comments">
+    <%= render event.comments unless event.comments.nil? %>
+</div>
+
+<%= render "comments/new", event: event %>
