@@ -11,8 +11,6 @@
         </div>
     <% end %>
 
-    <h1> Test </h1>
-
     <div>
         <%= form.label :title, style: "display: block" %>
         <%= form.text_field :title %>
@@ -26,6 +24,11 @@
     <div>
         <%= form.label :date, style: "display: block" %>
         <%= form.datetime_local_field :date %>
+    </div>
+
+    <div>
+        <%= form.label :location, style: "display: block" %>
+        <%= form.text_area :location %>
     </div>
 
     <div>
