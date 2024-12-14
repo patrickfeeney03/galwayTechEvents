@@ -18,17 +18,22 @@
 
     <div>
         <%= form.label :body, style: "display: block" %>
-        <%= form.text_area :body %>
+        <%= form.text_area :body, size: "100%x8" %>
     </div>
 
     <div>
-        <%= form.label :date, style: "display: block" %>
+        <%= form.label "Date and Time", style: "display: block" %>
         <%= form.datetime_local_field :date %>
     </div>
 
     <div>
         <%= form.label :location, style: "display: block" %>
         <%= form.text_area :location %>
+    </div>
+
+    <div>
+        <%= form.label :image, style: "display: block" %>
+        <%= form.file_field :image %>
     </div>
 
     <div>
