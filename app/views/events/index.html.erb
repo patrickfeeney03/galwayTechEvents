@@ -8,7 +8,8 @@
 <p>There are currently <%= @events.count %> active event posts.</p>
 
 <div id="events">
-    <% @events.each do |event| %>
+    <% sorted_events_by_date = @events.sort_by { |event| Time.parse(event.date) } %>
+    <% sorted_events_by_date.each do |event| %>
         <%= render event %>
         <p>
             <%= link_to "Show this event", event, class: "button" %>

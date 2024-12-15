@@ -22,15 +22,18 @@ class EventsController < ApplicationController
   # POST /events or /events.json
   def create
     @event = Event.new(event_params)
-    logger.info "The uploaded image has a size of #{(event_params[:image].size.to_f / 1.megabyte).round(2)}MB"
-    image_size_mb = (event_params[:image].size.to_f / 1.megabyte).round(2)
-    maximum_size_mb = 1.5
-    if image_size_mb > maximum_size_mb
-      logger.warn "Image Too big"
-      redirect_to new_event_path, notice: "The file size is too big. Maximum size #{maximum_size_mb}MB"
-      return
-    else
-      logger.info "Image Accepted. Image size #{image_size_mb}, maximum size #{maximum_size_mb}"
+
+    unless event_params[:image].nil?
+      logger.info "The uploaded image has a size of #{(event_params[:image].size.to_f / 1.megabyte).round(2)}MB"
+      image_size_mb = (event_params[:image].size.to_f / 1.megabyte).round(2)
+      maximum_size_mb = 1.5
+      if image_size_mb > maximum_size_mb
+        logger.warn "Image Too big"
+        redirect_to new_event_path, notice: "The file size is too big. Maximum size #{maximum_size_mb}MB"
+        return
+      else
+        logger.info "Image Accepted. Image size #{image_size_mb}, maximum size #{maximum_size_mb}"
+      end
     end
 
     respond_to do |format|
