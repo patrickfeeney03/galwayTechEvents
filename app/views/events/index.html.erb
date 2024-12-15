@@ -5,7 +5,7 @@
 <% content_for :title, "Events" %>
 
 <h1>Events</h1>
-<p>There are currently <%= @events.count %> active event posts.</p>
+<p class="notice">There are currently <%= @events.count %> active event posts.</p>
 
 <div id="events">
     <% sorted_events_by_date = @events.sort_by { |event| Time.parse(event.date) } %>
