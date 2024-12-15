@@ -1,16 +1,19 @@
-<p style="color: green"><%= notice %></p>
+<% unless notice.nil? %>
+    <p style="color: green"><%= notice %></p>
+<% end %>
 
 <% content_for :title, "Events" %>
 
 <h1>Events</h1>
+<p>There are currently <%= @events.count %> active event posts.</p>
 
 <div id="events">
-  <% @events.each do |event| %>
-    <%= render event %>
-    <p>
-      <%= link_to "Show this event", event, class: "button" %>
-    </p>
-  <% end %>
+    <% @events.each do |event| %>
+        <%= render event %>
+        <p>
+            <%= link_to "Show this event", event, class: "button" %>
+        </p>
+    <% end %>
 </div>
 
 <%#= link_to "New event", new_event_path %>
