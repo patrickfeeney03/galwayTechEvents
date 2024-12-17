@@ -1,0 +1,5 @@
+<div>
+    <%= link_to "Register", new_registration_path, class: "button" unless current_page? new_registration_path %>
+    <%= link_to "Sign In", new_session_path, class: "button" unless current_page? new_session_path %>
+    <%= link_to "Forgot Password?", new_password_path, class: "button" unless current_page? new_password_path %>
+</div>

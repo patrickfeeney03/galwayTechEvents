@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resource :registration, only: %i[create new]
   resource :session
   resources :passwords, param: :token
   resources :events do
@@ -15,5 +16,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "events#index"
 end
