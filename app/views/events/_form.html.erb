@@ -36,6 +36,12 @@
         <%= form.file_field :image %>
     </div>
 
+<!--    https://guides.rubyonrails.org/form_helpers.html-->
+    <div>
+        <%= form.label :visibility, style: "display: block" %>
+        <%= form.select :visibility, %w[Private Public], selected: "Public" %>
+    </div>
+
     <div>
         <%= form.submit "Save" %>
     </div>
