@@ -1,7 +1,9 @@
 <%= form_with model: [ event, Comment.new ] do |form| %>
 
     <div>
-        <%= form.label :Comment, style: "display: block" %>
+<!--        Understand how Edge knows what the text_area name is and how it matches it to the label-->
+<!--        I kind of get a syntax error in HTML if the label has different name-->
+        <%= form.label :body, style: "display: block" %>
         <%= form.text_area :body, size: "100%x3" %>
     </div>
 
