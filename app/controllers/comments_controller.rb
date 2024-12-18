@@ -21,8 +21,24 @@ class CommentsController < ApplicationController
 
   # POST /comments or /comments.json
   def create
-    @event.comments.create! params.expect(comment: [:body])
-    redirect_to @event
+    comments = @event.comments
+    user = User.find(session[:user_id])
+    form_parameter = params.expect(comment: [:body])
+    comment_to_save = comments.new(form_parameter)
+    comment_to_save[:author] = user.name
+    # Something to remember... I was using comment.create
+    # but .create always returns the comment object even
+    # if it fails to save lol. So the if statement was always
+    # evaluating to true...
+    if comment_to_save.save
+      redirect_to @event
+    else
+      redirect_to @event, alert: "Your name wasn't set for some reason. Please contact an Admin."
+    end
+
+    # TODO include the user_id as part of the comment? Do the same I did with events and users maybe.
+    # @event.comments.create! params.expect(comment: [:body])
+
     # @comment = Comment.new(comment_params)
     #
     # respond_to do |format|
