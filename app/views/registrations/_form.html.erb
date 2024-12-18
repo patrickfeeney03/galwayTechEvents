@@ -9,6 +9,16 @@
     <% end %>
 
     <div>
+        <%= form.label :name, style: "display: block" %>
+        <%= form.text_field :name %>
+    </div>
+
+    <div>
+        <%= form.label :last_name, style: "display: block" %>
+        <%= form.text_field :last_name %>
+    </div>
+
+    <div>
         <%= form.label :email_address, style: "display: block" %>
         <%= form.email_field :email_address %>
     </div>

@@ -5,12 +5,14 @@
 <% content_for :title, "Events" %>
 
 <h1>Events</h1>
-<p class="notice">There are currently <%= @events.count %> active event posts.</p>
+<p>There are currently <%= @events.count %> active event posts.</p>
 
 <div id="events">
     <% sorted_events_by_date = @events.sort_by { |event| Time.parse(event.date) } %>
     <% sorted_events_by_date.each do |event| %>
-        <%= render event %>
+        <%= link_to event, style: "text-decoration: none; color: inherit; display: block;" do %>
+            <%= render event %>
+        <% end %>
         <p>
             <%= link_to "Show this event", event, class: "button" %>
         </p>

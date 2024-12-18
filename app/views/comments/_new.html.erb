@@ -1,5 +1,11 @@
 <%= form_with model: [ event, Comment.new ] do |form| %>
-    Your Comment:<br>
-    <%= form.text_area :body, size: "100%x3" %><br>
-    <%= form.submit %>
+
+    <div>
+        <%= form.label :Comment, style: "display: block" %>
+        <%= form.text_area :body, size: "100%x3" %>
+    </div>
+
+    <div>
+        <%= form.submit %>
+    </div>
 <% end %>
