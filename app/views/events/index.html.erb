@@ -2,6 +2,8 @@
     <p style="color: green"><%= notice %></p>
 <% end %>
 
+<%= tag.p "Welcome #{@user.name}" %>
+
 <!--the fuck is this content_for-->
 <% content_for :title, "Events" %>
 

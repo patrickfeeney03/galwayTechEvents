@@ -1,15 +1,21 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
+  before_action :check_ownership, only: %i[ edit destroy update ]
 
   # GET /events or /events.json
   def index
     user_id = session[:user_id]
     @events = Event.where(user_id: user_id).or(Event.where(visibility: "Public"))
+    @user = User.find(user_id)
   end
 
   # GET /events/1 or /events/1.json
   def show
-
+    user_id = session[:user_id]
+    # Check if it should be accessible for User
+    unless @event.user_id == user_id || @event.visibility == "Public"
+      redirect_to events_path
+    end
   end
 
   # GET /events/new
@@ -78,6 +84,13 @@ class EventsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_event
     @event = Event.find(params.expect(:id))
+  end
+
+  def check_ownership
+    user_id = session[:user_id]
+    unless @event.user_id == user_id
+      redirect_to @event
+    end
   end
 
   # Only allow a list of trusted parameters through.
