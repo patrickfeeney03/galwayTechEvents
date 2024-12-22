@@ -39,7 +39,7 @@
 <!--    https://guides.rubyonrails.org/form_helpers.html-->
     <div>
         <%= form.label :visibility, style: "display: block" %>
-        <%= form.select :visibility, %w[Private Public], selected: "Public" %>
+        <%= form.select :visibility, %w[Private Public], selected: event.visibility || "Public" %>
     </div>
 
     <div>

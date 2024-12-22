@@ -6,6 +6,7 @@ class EventsController < ApplicationController
   def index
     user_id = session[:user_id]
     @events = Event.where(user_id: user_id).or(Event.where(visibility: "Public"))
+    # There was something weird going on here with user_id where the user_id didn't exist or somethingqv
     @user = User.find(user_id)
   end
 
@@ -25,6 +26,7 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
+    logger.info("running edit")
   end
 
   # POST /events or /events.json

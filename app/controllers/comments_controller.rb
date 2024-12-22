@@ -17,6 +17,9 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+    # logger.warn(params[:id])
+    @event = Event.find(params[:event_id])
+    @comment = Comment.find(params[:id])
   end
 
   # POST /comments or /comments.json
@@ -26,6 +29,7 @@ class CommentsController < ApplicationController
     form_parameter = params.expect(comment: [:body])
     comment_to_save = comments.new(form_parameter)
     comment_to_save[:author] = user.name
+    comment_to_save[:user_id] = user.id
     # Something to remember... I was using comment.create
     # but .create always returns the comment object even
     # if it fails to save lol. So the if statement was always
@@ -33,23 +37,10 @@ class CommentsController < ApplicationController
     if comment_to_save.save
       redirect_to @event
     else
-      redirect_to @event, alert: "Your name wasn't set for some reason. Please contact an Admin."
+      redirect_to @event, alert: "There was an error trying to save your comment:
+                                  #{comment_to_save.errors.full_messages.to_sentence}.
+                                  Please Sign Out and Sign Back In."
     end
-
-    # TODO include the user_id as part of the comment? Do the same I did with events and users maybe.
-    # @event.comments.create! params.expect(comment: [:body])
-
-    # @comment = Comment.new(comment_params)
-    #
-    # respond_to do |format|
-    #   if @comment.save
-    #     format.html { redirect_to @comment, notice: "Comment was successfully created." }
-    #     format.json { render :show, status: :created, location: @comment }
-    #   else
-    #     format.html { render :new, status: :unprocessable_entity }
-    #     format.json { render json: @comment.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # PATCH/PUT /comments/1 or /comments/1.json
