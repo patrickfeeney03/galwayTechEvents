@@ -25,7 +25,9 @@
 
 <body>
 <div style="display: flex; align-items: center; justify-content: space-between">
-    <h1>Galway Tech Events</h1>
+    <%= link_to root_url, style: "text-decoration: none; color: inherit; display: block;" do %>
+        <h1>Galway Tech Events</h1>
+    <% end %>
     <% if authenticated? %>
         <%= button_to "Create Event", new_event_path, method: :get, style: "float: right" %>
         <%= button_to "Sign Out", session_path, method: :delete %>
