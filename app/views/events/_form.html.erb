@@ -31,12 +31,33 @@
         <%= form.text_area :location %>
     </div>
 
+<!--    Only display the image if the event has been saved and if there is an image-->
+    <% if event.persisted? && event.image.attached? %>
+        <div>
+            <%= image_tag event.image, style: "max-width: 300px;" %>
+        </div>
+
+        <div>
+            <%= form.check_box :remove_image %>
+            <%= form.label :remove_image, "Remove Current Image" %>
+        </div>
+
+        <% imageText = "Select another image:" %>
+    <% else %>
+        <% imageText = "Select an image:" %>
+    <% end %>
+
+<!--    This happens when the page reloads because of some error and the file field can't be set to what it was.-->
+    <% if !event.persisted? && event.image.attached? %>
+        <span style="color: red">Don't forget to re-attach your image.</span>
+        <span style="color: red">For security reasons you need to re attach it after a refresh.</span>
+    <% end %>
+
     <div>
-        <%= form.label :image, style: "display: block" %>
-        <%= form.file_field :image %>
+        <%= form.label :image, imageText, style: "display: block" %>
+        <%= form.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
     </div>
 
-<!--    https://guides.rubyonrails.org/form_helpers.html-->
     <div>
         <%= form.label :visibility, style: "display: block" %>
         <%= form.select :visibility, %w[Private Public], selected: event.visibility || "Public" %>

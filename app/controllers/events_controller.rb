@@ -26,7 +26,6 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    logger.info("running edit")
   end
 
   # POST /events or /events.json
@@ -60,6 +59,16 @@ class EventsController < ApplicationController
 
   # PATCH/PUT /events/1 or /events/1.json
   def update
+    @event = Event.find(params[:id])
+
+    # Delete the image if checkbox is set
+    if params[:event][:remove_image] == "1"
+      logger.info "Deleting image"
+      @event.image.purge
+    else
+      logger.info "Not deleting image"
+    end
+
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: "Event was successfully updated." }
@@ -97,6 +106,6 @@ class EventsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def event_params
-    params.expect(event: [:title, :body, :date, :location, :image, :visibility])
+    params.expect(event: [:title, :body, :date, :location, :image, :visibility ])
   end
 end
